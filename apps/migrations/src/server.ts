@@ -4,6 +4,7 @@ export default {
   async seeds() {
     const actions = {
       'initial-data': seeds.initialData,
+      'initial-table': seeds.initTables,
     };
 
     if (!process.env.MIGRATION_SEEDER) return;

@@ -1,18 +1,25 @@
 import { join } from 'path';
-// import { readFileSync } from 'fs';
-// import {parse} from 'papaparse';
+import { readFileSync } from 'fs';
+import { parse } from 'papaparse';
 
-export const csvJson = (file: string) => {
-  const badgeCsv = join(__dirname, 'file');
+export const csvJson = async (file: string): Promise<unknown> => {
+  try {
+    const badgeCsv = join(__dirname, file);
 
-  console.log(badgeCsv);
-  // const csvData = readFileSync(badgeCsv, 'utf8');
+    const csvData = readFileSync(badgeCsv, 'utf8');
 
-  // parse(csvData, {
-  //   delimiter: ',',
-  //   header: true,
-  //   complete: function (results) {
-  //     console.log('Finished:', results);
-  //   },
-  // });
+    const data = await new Promise((resolve) => {
+      parse(csvData, {
+        delimiter: ',',
+        header: true,
+        complete: function (results) {
+          resolve(results.data);
+        },
+      });
+    });
+
+    return data;
+  } catch (e: unknown) {
+    console.error(e);
+  }
 };

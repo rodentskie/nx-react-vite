@@ -1,6 +1,19 @@
-import { csvJson } from '@practera-badges/library/parse-csv';
-export default async function () {
-  const file = '../assets/initial-badges.csv';
+import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 
-  csvJson(file);
+import { csvJson } from '@practera-badges/library/parse-csv';
+
+import { dbInstance } from '../db';
+
+export default async function () {
+  const badgeFile = 'assets/initial-badges.csv';
+  const certificateFile = 'assets/initial-certificates.csv';
+
+  const badgeData = await csvJson(badgeFile);
+  const certificateData = await csvJson(certificateFile);
+
+  const documentClient = new DocumentClient({ service: dbInstance() });
+
+  console.log(documentClient);
+  console.log(badgeData);
+  console.log(certificateData);
 }
