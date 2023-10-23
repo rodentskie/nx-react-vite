@@ -1,7 +1,7 @@
 {
-  "name": "api",
+  "name": "migrations",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/api/src",
+  "sourceRoot": "apps/migrations/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -11,11 +11,12 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/api",
-        "main": "apps/api/src/main.ts",
-        "tsConfig": "apps/api/tsconfig.app.json",
+        "outputPath": "dist/apps/migrations",
+        "main": "apps/migrations/src/main.ts",
+        "tsConfig": "apps/migrations/tsconfig.app.json",
+        "assets": ["apps/migrations/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/api/webpack.config.js"
+        "webpackConfig": "apps/migrations/webpack.config.js"
       },
       "configurations": {
         "development": {},
@@ -26,14 +27,14 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "api:build"
+        "buildTarget": "migrations:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "api:build:development"
+          "buildTarget": "migrations:build:development"
         },
         "production": {
-          "buildTarget": "api:build:production"
+          "buildTarget": "migrations:build:production"
         }
       }
     },
@@ -41,14 +42,14 @@
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/api/**/*.ts"]
+        "lintFilePatterns": ["apps/migrations/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/api/jest.config.ts",
+        "jestConfig": "apps/migrations/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {

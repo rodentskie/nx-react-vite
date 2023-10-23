@@ -8,6 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "noUnusedLocals": true,
     "target": "es2015",
     "module": "esnext",
     "lib": ["es2020", "dom"],
@@ -15,7 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@practera-badges/library/delay": ["library/delay/src/index.ts"]
+      "@practera-badges/library/delay": ["library/delay/src/index.ts"],
+      "@practera-badges/library/parse-csv": ["library/parse-csv/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
