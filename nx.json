@@ -37,5 +37,22 @@
     ],
     "sharedGlobals": []
   },
-  "nxCloudAccessToken": "OWU3NmJjNmQtYWRiNS00MTQ4LTg3ZjMtZjVlNTQyZjNlMGFjfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "OWU3NmJjNmQtYWRiNS00MTQ4LTg3ZjMtZjVlNTQyZjNlMGFjfHJlYWQtd3JpdGU=",
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "style": "none",
+        "linter": "eslint",
+        "bundler": "vite",
+        "babel": true
+      },
+      "component": {
+        "style": "none"
+      },
+      "library": {
+        "style": "none",
+        "linter": "eslint"
+      }
+    }
+  }
 }
