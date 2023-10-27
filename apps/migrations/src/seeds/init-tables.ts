@@ -1,14 +1,8 @@
-import { DynamoDB } from 'aws-sdk';
-
+import { dbInstance } from '../db';
 export default async function () {
-  console.log('Asdasdasdasxxxxxxxxxx');
+  const dynamoDB = dbInstance();
 
-  const dynamoDB = new DynamoDB({
-    endpoint: 'http://localhost:8000', // Local DynamoDB endpoint
-    region: 'us-east-1', // You can set any valid region
-  });
-
-  // Use the `listTables` method to list all tables
+  const tables = ['migrations', 'certificates', 'badges'];
   dynamoDB.listTables({}, (err, data) => {
     if (err) {
       console.error(
