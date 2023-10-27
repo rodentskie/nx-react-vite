@@ -17,7 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "@practera-badges/library/delay": ["library/delay/src/index.ts"],
-      "@practera-badges/library/parse-csv": ["library/parse-csv/src/index.ts"]
+      "@practera-badges/library/parse-csv": ["library/parse-csv/src/index.ts"],
+      "@practera-badges/library/types": ["library/types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

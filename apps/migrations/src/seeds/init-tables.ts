@@ -2,7 +2,7 @@ import { dbInstance } from '../db';
 export default async function () {
   const dynamoDB = dbInstance();
 
-  const tables = ['migrations', 'certificates', 'badges'];
+  const tables = ['certificates', 'badges'];
 
   tables.forEach((data) => {
     const params = {
@@ -38,8 +38,5 @@ export default async function () {
         );
       }
     });
-
-
-    
   });
 }
