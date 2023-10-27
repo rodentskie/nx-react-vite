@@ -1,15 +1,16 @@
-import initTables from './seeds/init-tables';
+import seeds from './seeds';
 
 export default {
-  seeds() {
+  async seeds() {
     const actions = {
-      'initial-table': initTables(),
+      'initial-data': seeds.initialData,
+      'initial-table': seeds.initTables,
     };
 
     if (!process.env.MIGRATION_SEEDER) return;
 
-    const entryPoint = process.env.MIGRATION_SEEDER || 'initial-table';
-
-    actions[entryPoint];
+    const entryPoint = process.env.MIGRATION_SEEDER;
+    const executeAction = actions[entryPoint];
+    await executeAction();
   },
 };

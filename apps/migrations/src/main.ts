@@ -8,7 +8,7 @@ const ACTIONS = {
   seeds: service.seeds,
 };
 
-function main(action: string) {
+async function main(action: string) {
   const executeAction = ACTIONS[action];
 
   if (!executeAction) {
@@ -17,7 +17,7 @@ function main(action: string) {
   }
 
   try {
-    executeAction();
+    await executeAction();
   } catch (error) {
     console.log(error);
     process.exit(0);

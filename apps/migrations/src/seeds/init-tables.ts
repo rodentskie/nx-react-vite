@@ -1,9 +1,11 @@
 import { DynamoDB } from 'aws-sdk';
 
-export default function () {
+export default async function () {
+  console.log('Asdasdasdasxxxxxxxxxx');
+
   const dynamoDB = new DynamoDB({
-    endpoint: 'http://localhost:8000',
-    region: 'us-east-1',
+    endpoint: 'http://localhost:8000', // Local DynamoDB endpoint
+    region: 'us-east-1', // You can set any valid region
   });
 
   // Use the `listTables` method to list all tables
@@ -14,7 +16,7 @@ export default function () {
         JSON.stringify(err, null, 2)
       );
     } else {
-      console.log('Table names tae fire:', data.TableNames);
+      console.log('Table names:', data.TableNames);
     }
   });
 }
