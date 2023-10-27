@@ -16,6 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@api/*": ["apps/api/src/*"],
       "@practera-badges/library/delay": ["library/delay/src/index.ts"],
       "@practera-badges/library/parse-csv": ["library/parse-csv/src/index.ts"],
       "@practera-badges/library/types": ["library/types/src/index.ts"]

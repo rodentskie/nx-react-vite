@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-koa';
 
 export const interfaces = gql`
   type Badge {
-    id: ID!
+    id: String!
     title: String!
     details: String!
     imageUrl: String!
@@ -12,6 +12,7 @@ export const interfaces = gql`
   }
 
   type Certificate {
+    id: String!
     s3Url: String!
   }
 `;
