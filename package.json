@@ -8,7 +8,6 @@
   "private": true,
   "dependencies": {
     "@graphql-tools/schema": "^10.0.0",
-    "@nx/next": "16.10.0",
     "@swc/helpers": "~0.5.2",
     "apollo-server-core": "^3.12.1",
     "apollo-server-koa": "^3.12.1",
@@ -30,6 +29,7 @@
     "@nx/eslint-plugin": "17.0.1",
     "@nx/jest": "17.0.1",
     "@nx/js": "17.0.1",
+    "@nx/next": "17.0.1",
     "@nx/node": "17.0.1",
     "@nx/webpack": "17.0.1",
     "@nx/workspace": "17.0.1",
