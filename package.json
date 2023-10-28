@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "seed:initial": "export MIGRATION_SEEDER=initial-data && nx build migrations && node dist/apps/migrations/main.js"
+    "seed:data": "export MIGRATION_SEEDER=initial-data && nx build migrations && node dist/apps/migrations/main.js",
+    "seed:table": "export MIGRATION_SEEDER=initial-table && nx build migrations && node dist/apps/migrations/main.js",
+		"serve": "nx run $APP:serve"
   },
   "private": true,
   "dependencies": {
