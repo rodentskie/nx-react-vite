@@ -5,7 +5,7 @@ export interface BadgesField {
   imageUrl: string;
   date: string;
   email: string;
-  certificate: string;
+  certificateId: string;
 }
 
 export interface BadgesScanResult {
@@ -24,4 +24,21 @@ export interface UpdateBadgeInput {
     email: string;
     certificateId: string;
   };
+}
+
+export interface BadgesQueryField {
+  id: string;
+  title: string;
+  details: string;
+  imageUrl: string;
+  date: string;
+  email: string;
+  certificate: {
+    id: string;
+    s3Url: string;
+  };
+}
+
+export interface BadgesResponse {
+  getBadges: BadgesQueryField[];
 }

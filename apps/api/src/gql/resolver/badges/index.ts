@@ -15,7 +15,7 @@ export const BadgesWorldResolver = {
     certificate: async (
       root: BadgesField
     ): Promise<CertificatesField | null> => {
-      const certificateId = root.certificate;
+      const certificateId = root.certificateId;
       const documentClient = new DocumentClient({ service: dbInstance() });
 
       const params = {
@@ -59,7 +59,7 @@ export const BadgesWorldResolver = {
       });
 
       const badges = data as BadgesScanResult;
-
+      
       return badges.Items;
     },
   },

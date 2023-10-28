@@ -6,7 +6,3 @@ export interface CertificatesField {
 export interface CertificateGetResult {
   Item: CertificatesField;
 }
-
-export interface CertificateGetResult {
-  Item: CertificatesField;
-}

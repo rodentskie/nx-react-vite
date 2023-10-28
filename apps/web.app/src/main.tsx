@@ -1,4 +1,3 @@
-import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import '@mantine/core/styles.css';
 import { MantineProvider } from '@mantine/core';
@@ -25,12 +24,10 @@ root.render(
     }}
   >
     <HelmetProvider>
-      <StrictMode>
-        <Helmet>
-          <title>Practera</title>
-        </Helmet>
-        <RouterProvider router={router} />
-      </StrictMode>
+      <Helmet>
+        <title>Practera</title>
+      </Helmet>
+      <RouterProvider router={router} />
     </HelmetProvider>
   </MantineProvider>
 );
