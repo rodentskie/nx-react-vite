@@ -1,23 +1,11 @@
-import {
-  Group,
-  Code,
-  ScrollArea,
-  rem,
-  AppShell,
-  Burger,
-  Menu,
-} from '@mantine/core';
+import { Menu } from '@mantine/core';
 import { IconNotes } from '@tabler/icons-react';
-import { useDisclosure } from '@mantine/hooks';
 
 import { UserButton, ButtonMenu } from '@practera-badges/library/user.button';
 import { LinksGroup } from '@practera-badges/library/link.group';
-import { Logo } from '@practera-badges/library/logo';
-import { ActionToggle } from '@practera-badges/library/theme.switch';
+import { Dashboard } from '@practera-badges/library/dashboard';
 
-import classes from './style.module.css';
-
-const mockdata = [
+const sideBars = [
   {
     label: 'Documents',
     icon: IconNotes,
@@ -30,7 +18,7 @@ const mockdata = [
 ];
 
 export default function App() {
-  const links = mockdata.map((item) => (
+  const links = sideBars.map((item) => (
     <LinksGroup {...item} key={item.label} />
   ));
 
@@ -51,35 +39,6 @@ export default function App() {
       </>
     );
   };
-  const [opened, { toggle }] = useDisclosure();
 
-  return (
-    <AppShell
-      header={{ height: 60 }}
-      navbar={{ width: 300, breakpoint: 'sm', collapsed: { mobile: !opened } }}
-      padding="md"
-    >
-      <AppShell.Header>
-        <Group h="100%" px="md" justify="space-between">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <Group justify="space-between">
-            <Logo style={{ width: rem(120) }} />
-            <Code fw={700}>v3.1.2</Code>
-          </Group>
-
-          <ActionToggle />
-        </Group>
-      </AppShell.Header>
-      <AppShell.Navbar p="md">
-        <ScrollArea className={classes.links}>
-          <div className={classes.linksInner}>{links}</div>
-        </ScrollArea>
-
-        <div className={classes.footer}>
-          <UserButtonMenu />
-        </div>
-      </AppShell.Navbar>
-      <AppShell.Main>Main</AppShell.Main>
-    </AppShell>
-  );
+  return <Dashboard links={links} UserButtonMenu={UserButtonMenu} />;
 }
