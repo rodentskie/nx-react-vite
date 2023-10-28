@@ -4,7 +4,7 @@ import { IconNotes } from '@tabler/icons-react';
 import { UserButton, ButtonMenu } from '@practera-badges/library/user.button';
 import { LinksGroup } from '@practera-badges/library/link.group';
 import { Dashboard } from '@practera-badges/library/dashboard';
-
+import { SEO } from '@practera-badges/library/seo';
 const sideBars = [
   {
     label: 'Documents',
@@ -40,5 +40,18 @@ export default function App() {
     );
   };
 
-  return <Dashboard links={links} UserButtonMenu={UserButtonMenu} />;
+  return (
+    <>
+      <SEO
+        title="Dashboard | Practera"
+        description="Manage documents for Practera, like badges and certificates."
+        image="https://go.practera.com/hubfs/Practera_Logo_Primary_RGB%20(1).png"
+        url="http://localhost:4200"
+        keywords="Practera;Badges;Certificates"
+        lang="en"
+      />
+
+      <Dashboard links={links} UserButtonMenu={UserButtonMenu} />
+    </>
+  );
 }

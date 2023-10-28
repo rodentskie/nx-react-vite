@@ -24,6 +24,7 @@
       ],
       "@practera-badges/library/logo": ["library/logo/src/index.ts"],
       "@practera-badges/library/parse-csv": ["library/parse-csv/src/index.ts"],
+      "@practera-badges/library/seo": ["library/seo/src/index.ts"],
       "@practera-badges/library/theme.switch": [
         "library/theme.switch/src/index.ts"
       ],
