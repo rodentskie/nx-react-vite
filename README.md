@@ -12,6 +12,10 @@ Monorepo powered by [NX](https://nx.dev/)
 
 `nx g @nx/node:app api --bundler webpack --directory apps`
 
-### Create a TypeScript based application
+### Create a react application
 
 `nx g @nx/react:app web.app --bundler=vite --directory apps`
+
+### Create a react library
+
+`nx g @nx/react:lib user.button --bundler=vite --directory library`

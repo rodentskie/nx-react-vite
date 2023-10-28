@@ -18,8 +18,15 @@
     "paths": {
       "@api/*": ["apps/api/src/*"],
       "@practera-badges/library/delay": ["library/delay/src/index.ts"],
+      "@practera-badges/library/link.group": [
+        "library/link.group/src/index.ts"
+      ],
+      "@practera-badges/library/logo": ["library/logo/src/index.ts"],
       "@practera-badges/library/parse-csv": ["library/parse-csv/src/index.ts"],
-      "@practera-badges/library/types": ["library/types/src/index.ts"]
+      "@practera-badges/library/types": ["library/types/src/index.ts"],
+      "@practera-badges/library/user.button": [
+        "library/user.button/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
