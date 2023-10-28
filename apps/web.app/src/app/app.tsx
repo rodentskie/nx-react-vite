@@ -1,12 +1,4 @@
-import {
-  Group,
-  Code,
-  ScrollArea,
-  rem,
-  AppShell,
-  Burger,
-  Skeleton,
-} from '@mantine/core';
+import { Group, Code, ScrollArea, rem, AppShell, Burger } from '@mantine/core';
 import {
   IconNotes,
   IconCalendarStats,
@@ -17,7 +9,6 @@ import {
   IconLock,
 } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
-import { MantineLogo } from '@mantine/ds';
 
 import { UserButton } from '@practera-badges/library/user.button';
 import { LinksGroup } from '@practera-badges/library/link.group';
@@ -77,29 +68,22 @@ export default function App() {
       <AppShell.Header>
         <Group h="100%" px="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <MantineLogo size={30} />
+          <Group justify="space-between">
+            <Logo style={{ width: rem(120) }} />
+            <Code fw={700}>v3.1.2</Code>
+          </Group>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        <nav className={classes.navbar}>
-         
+        <ScrollArea className={classes.links}>
+          <div className={classes.linksInner}>{links}</div>
+        </ScrollArea>
 
-          <ScrollArea className={classes.links}>
-            <div className={classes.linksInner}>{links}</div>
-          </ScrollArea>
-
-          <div className={classes.footer}>
-            <UserButton />
-          </div>
-        </nav>
+        <div className={classes.footer}>
+          <UserButton />
+        </div>
       </AppShell.Navbar>
       <AppShell.Main>Main</AppShell.Main>
     </AppShell>
   );
-}
-
-{
-  /* 
-  
-        */
 }

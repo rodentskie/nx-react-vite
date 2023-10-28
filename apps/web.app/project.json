@@ -66,6 +66,20 @@
       "options": {
         "lintFilePatterns": ["apps/web.app/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "docker": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+					"mkdir docker/web.app/tmp/",
+          "rsync -aP dist/apps/web.app/* docker/web.app/tmp/",
+					"cp docker/Dockerfile.frontend docker/web.app/tmp/Dockerfile",
+					"cp docker/.dockerignore docker/web.app/tmp/",
+					"docker build --no-cache docker/web.app/tmp/ --tag web.app:latest",
+					"rm -rf docker/web.app/tmp/"
+        ],
+        "parallel": false
+      }
     }
   },
   "tags": []
