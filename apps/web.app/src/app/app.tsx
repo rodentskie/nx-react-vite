@@ -2,27 +2,25 @@ import { Menu } from '@mantine/core';
 import { IconNotes } from '@tabler/icons-react';
 
 import { UserButton, ButtonMenu } from '@practera-badges/library/user.button';
-import { LinksGroup } from '@practera-badges/library/link.group';
 import { Dashboard } from '@practera-badges/library/dashboard';
 import { SEO } from '@practera-badges/library/seo';
+import { LinksGroupProps } from '@practera-badges/library/types';
 
-const sideBars = [
+import { Badges, Certificates } from '../pages';
+
+const sideBars: LinksGroupProps[] = [
   {
     label: 'Documents',
     icon: IconNotes,
     initiallyOpened: false,
     links: [
-      { label: 'Badges', link: '/' },
-      { label: 'Certificates', link: '/' },
+      { label: 'Badges', link: '/', view: <Badges /> },
+      { label: 'Certificates', link: '/', view: <Certificates /> },
     ],
   },
 ];
 
 export default function App() {
-  const links = sideBars.map((item) => (
-    <LinksGroup {...item} key={item.label} />
-  ));
-
   const UserButtonMenu = (): JSX.Element => {
     return (
       <>
@@ -52,7 +50,7 @@ export default function App() {
         lang="en"
       />
 
-      <Dashboard links={links} UserButtonMenu={UserButtonMenu} />
+      <Dashboard sideBars={sideBars} UserButtonMenu={UserButtonMenu} />
     </>
   );
 }

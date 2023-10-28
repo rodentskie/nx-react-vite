@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import {
   Group,
   Box,
@@ -13,14 +13,15 @@ import { LinksGroupProps } from '@practera-badges/library/types';
 
 import classes from './style.module.css';
 
-
-
 export function LinksGroup({
   icon: Icon,
   label,
   initiallyOpened,
   links,
-}: LinksGroupProps) {
+  setSlot,
+}: LinksGroupProps & {
+  setSlot: Dispatch<SetStateAction<React.ReactNode>>;
+}) {
   const hasLinks = Array.isArray(links);
   const [opened, setOpened] = useState(initiallyOpened || false);
   const items = (hasLinks ? links : []).map((link) => (
@@ -29,7 +30,10 @@ export function LinksGroup({
       className={classes.link}
       href={link.link}
       key={link.label}
-      onClick={(event) => event.preventDefault()}
+      onClick={(event) => {
+        setSlot(link.view);
+        event.preventDefault();
+      }}
     >
       {link.label}
     </Text>

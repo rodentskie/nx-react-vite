@@ -3,17 +3,28 @@ import { useDisclosure } from '@mantine/hooks';
 
 import { ActionToggle } from '@practera-badges/library/theme.switch';
 import { Logo } from '@practera-badges/library/logo';
+import { LinksGroupProps } from '@practera-badges/library/types';
+import { LinksGroup } from '@practera-badges/library/link.group';
+
 import classes from './style.module.css';
+import { useState } from 'react';
 
 interface DashboardProps {
-  links: JSX.Element[];
   UserButtonMenu: () => JSX.Element;
+  sideBars: LinksGroupProps[];
 }
 
 export function Dashboard(props: DashboardProps) {
-  const { links, UserButtonMenu } = props;
+  const { sideBars, UserButtonMenu } = props;
+
+  const [slot, setSlot] = useState<React.ReactNode>();
+
+  const links = sideBars.map((item) => (
+    <LinksGroup {...item} key={item.label} setSlot={setSlot} />
+  ));
 
   const [opened, { toggle }] = useDisclosure();
+  const version = import.meta.env.PRACTERA_VERSION || 'v0.0.1';
 
   return (
     <AppShell
@@ -26,7 +37,7 @@ export function Dashboard(props: DashboardProps) {
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Group justify="space-between">
             <Logo style={{ width: rem(120) }} />
-            <Code fw={700}>v3.1.2</Code>
+            <Code fw={700}>{version}</Code>
           </Group>
 
           <ActionToggle />
@@ -41,7 +52,7 @@ export function Dashboard(props: DashboardProps) {
           <UserButtonMenu />
         </div>
       </AppShell.Navbar>
-      <AppShell.Main>Main</AppShell.Main>
+      <AppShell.Main>{slot}</AppShell.Main>
     </AppShell>
   );
 }
