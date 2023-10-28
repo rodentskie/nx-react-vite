@@ -5,6 +5,7 @@ import { UserButton, ButtonMenu } from '@practera-badges/library/user.button';
 import { LinksGroup } from '@practera-badges/library/link.group';
 import { Dashboard } from '@practera-badges/library/dashboard';
 import { SEO } from '@practera-badges/library/seo';
+
 const sideBars = [
   {
     label: 'Documents',
