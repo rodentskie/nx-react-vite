@@ -1,4 +1,15 @@
-import { Group, Code, ScrollArea, rem, AppShell, Burger } from '@mantine/core';
+import {
+  Group,
+  Code,
+  ScrollArea,
+  rem,
+  AppShell,
+  Burger,
+  Menu,
+  Text,
+  UnstyledButton,
+  Avatar,
+} from '@mantine/core';
 import {
   IconNotes,
   IconCalendarStats,
@@ -7,14 +18,22 @@ import {
   IconFileAnalytics,
   IconAdjustments,
   IconLock,
+  IconArrowsLeftRight,
+  IconTrash,
+  IconSearch,
+  IconPhoto,
+  IconMessageCircle,
+  IconSettings,
+  IconChevronRight,
 } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 
-import { UserButton } from '@practera-badges/library/user.button';
+import { UserButton, ButtonMenu } from '@practera-badges/library/user.button';
 import { LinksGroup } from '@practera-badges/library/link.group';
 import { Logo } from '@practera-badges/library/logo';
 
 import classes from './style.module.css';
+import { forwardRef, useRef } from 'react';
 
 const mockdata = [
   { label: 'Dashboard', icon: IconGauge },
@@ -57,6 +76,24 @@ export default function App() {
     <LinksGroup {...item} key={item.label} />
   ));
 
+  const ref = useRef();
+  const UserButtonMenu = (): JSX.Element => {
+    return (
+      <>
+        <Menu withArrow position="right-end">
+          <Menu.Target>
+            <UserButton
+              image="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
+              name="Harriette Spoonlicker"
+              email="hspoonlicker@outlook.com"
+            />
+          </Menu.Target>
+
+          <ButtonMenu />
+        </Menu>
+      </>
+    );
+  };
   const [opened, { toggle }] = useDisclosure();
 
   return (
@@ -80,7 +117,7 @@ export default function App() {
         </ScrollArea>
 
         <div className={classes.footer}>
-          <UserButton />
+          <UserButtonMenu />
         </div>
       </AppShell.Navbar>
       <AppShell.Main>Main</AppShell.Main>
