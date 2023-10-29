@@ -18,3 +18,34 @@ services:
       AWS_SECRET_ACCESS_KEY: local
     depends_on:
       - dynamodb-local
+
+  migrations:
+    image: migrations:latest
+    container_name: migrations
+    environment:
+      DB_ENDPOINT: 'http://dynamodb-local:8000'
+    command: >
+      /bin/sh -c 'export MIGRATION_SEEDER=initial-table && node main && sleep 5s && export MIGRATION_SEEDER=initial-data && node main'
+    depends_on:
+      - dynamodb-local
+
+  api:
+    image: api:latest
+    container_name: api
+    ports:
+      - '9000:8080'
+    environment:
+      DB_ENDPOINT: 'http://dynamodb-local:8000'
+    depends_on:
+      - migrations
+  
+  web-app:
+    image: web.app:latest
+    container_name: web.app
+    ports:
+      - '5000:80'
+    environment:
+      PRACTERA_GQL_URL: 'http://api:9000/graphql'
+      PRACTERA_VERSION: 'v1.0.0'
+    depends_on:
+      - api

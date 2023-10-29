@@ -53,5 +53,3 @@ COPY . .
 RUN echo -e "#!/bin/sh\n\naws configure set aws_access_key_id \${ACCESS_KEY}\naws configure set aws_secret_access_key \${SECRET_KEY}\naws configure set default.region \${REGION}\naws configure set default.output json" > aws-configure.sh
 
 RUN sh aws-configure.sh
-
-CMD node main
