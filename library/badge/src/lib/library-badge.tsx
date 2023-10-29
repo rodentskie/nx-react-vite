@@ -8,9 +8,17 @@ import {
   Badge,
   useMantineTheme,
   rem,
+  Tooltip,
 } from '@mantine/core';
-import { IconHeart, IconBookmark, IconShare } from '@tabler/icons-react';
+import { useDisclosure } from '@mantine/hooks';
+import { useState } from 'react';
+
+import { IconEye, IconPencil } from '@tabler/icons-react';
 import { BadgesQueryField } from '@practera-badges/library/types';
+
+import { ViewCertificateModal } from './components/view-certificate';
+import { EditEmailModal } from './components/edit-email';
+
 import classes from './style.module.css';
 
 interface BadgeLayoutProps {
@@ -19,70 +27,76 @@ interface BadgeLayoutProps {
 
 export function BadgeLayout(props: BadgeLayoutProps) {
   const { data } = props;
-  console.log(data);
+  const [opened, { open, close }] = useDisclosure(false);
+  const [openedEdit, { open: openEdit, close: closeEdit }] =
+    useDisclosure(false);
+  const [imageSrc, setImageSrc] = useState('');
+
   const theme = useMantineTheme();
 
+  const handleSelectView = () => {
+    open();
+    setImageSrc(data.certificate.s3Url);
+  };
+
   return (
-    <Card withBorder padding="lg" radius="md" className={classes.card}>
-      <Card.Section mb="sm">
-        <Image
-          src="https://images.unsplash.com/photo-1477554193778-9562c28588c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80"
-          alt="Top 50 underrated plants for house decoration"
-          height={180}
-        />
-      </Card.Section>
+    <>
+      <ViewCertificateModal opened={opened} close={close} imageSrc={imageSrc} />
+      <EditEmailModal opened={openedEdit} close={closeEdit} />
+      <Card withBorder padding="lg" radius="md" className={classes.card}>
+        <Card.Section mb="sm">
+          <Image src={data.certificate.s3Url} alt={data.details} height={180} />
+        </Card.Section>
 
-      <Badge w="fit-content" variant="light">
-        decorations
-      </Badge>
+        <Badge w="fit-content" variant="light">
+          {data.title}
+        </Badge>
 
-      <Text fw={700} className={classes.title} mt="xs">
-        Top 50 underrated plants for house decoration
-      </Text>
+        <Text fw={700} className={classes.title} mt="xs">
+          {data.details}
+        </Text>
 
-      <Group mt="lg">
-        <Avatar
-          src="https://images.unsplash.com/photo-1628890923662-2cb23c2e0cfe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80"
-          radius="sm"
-        />
-        <div>
-          <Text fw={500}>Elsa Gardenowl</Text>
-          <Text fz="xs" c="dimmed">
-            posted 34 minutes ago
-          </Text>
-        </div>
-      </Group>
-
-      <Card.Section className={classes.footer}>
-        <Group justify="space-between">
-          <Text fz="xs" c="dimmed">
-            733 people liked this
-          </Text>
-          <Group gap={0}>
-            <ActionIcon variant="subtle" color="gray">
-              <IconHeart
-                style={{ width: rem(20), height: rem(20) }}
-                color={theme.colors.red[6]}
-                stroke={1.5}
-              />
-            </ActionIcon>
-            <ActionIcon variant="subtle" color="gray">
-              <IconBookmark
-                style={{ width: rem(20), height: rem(20) }}
-                color={theme.colors.yellow[6]}
-                stroke={1.5}
-              />
-            </ActionIcon>
-            <ActionIcon variant="subtle" color="gray">
-              <IconShare
-                style={{ width: rem(20), height: rem(20) }}
-                color={theme.colors.blue[6]}
-                stroke={1.5}
-              />
-            </ActionIcon>
-          </Group>
+        <Group mt="lg" justify="flex-start">
+          <Avatar src={data.imageUrl} radius="sm" />
+          <div>
+            <Text fw={500} size="xs">
+              {data.email}
+            </Text>
+            <Text fz="xs" c="dimmed">
+              {data.date}
+            </Text>
+          </div>
         </Group>
-      </Card.Section>
-    </Card>
+
+        <Card.Section className={classes.footer}>
+          <Group justify="flex-end">
+            <Group gap={0}>
+              <Tooltip label="Edit">
+                <ActionIcon variant="subtle" color="gray" onClick={openEdit}>
+                  <IconPencil
+                    style={{ width: rem(20), height: rem(20) }}
+                    color={theme.colors.yellow[6]}
+                    stroke={1.5}
+                  />
+                </ActionIcon>
+              </Tooltip>
+              <Tooltip label="View">
+                <ActionIcon
+                  variant="subtle"
+                  color="gray"
+                  onClick={handleSelectView}
+                >
+                  <IconEye
+                    style={{ width: rem(20), height: rem(20) }}
+                    color={theme.colors.blue[6]}
+                    stroke={1.5}
+                  />
+                </ActionIcon>
+              </Tooltip>
+            </Group>
+          </Group>
+        </Card.Section>
+      </Card>
+    </>
   );
 }
