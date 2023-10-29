@@ -15,6 +15,7 @@
         "main": "apps/migrations/src/main.ts",
         "tsConfig": "apps/migrations/tsconfig.app.json",
         "assets": ["apps/migrations/src/assets"],
+        "generatePackageJson": true,
         "isolatedConfig": true,
         "webpackConfig": "apps/migrations/webpack.config.js"
       },
@@ -58,6 +59,21 @@
           "codeCoverage": true
         }
       }
+    },
+    "docker": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "mkdir docker/migrations/tmp/",
+          "rsync -aP dist/apps/migrations/* docker/migrations/tmp/",
+          "cp docker/Dockerfile.migrations docker/migrations/tmp/Dockerfile",
+          "cp docker/.dockerignore docker/migrations/tmp/",
+          "docker build --no-cache docker/migrations/tmp/ --tag migrations:latest --build-arg ACCESS_KEY=local --build-arg SECRET_KEY=local --build-arg REGION=us-east-1",
+          "rm -rf docker/migrations/tmp/"
+        ],
+        "parallel": false
+      },
+      "dependsOn": ["build"]
     }
   },
   "tags": []

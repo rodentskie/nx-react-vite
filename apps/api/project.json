@@ -15,7 +15,8 @@
         "main": "apps/api/src/main.ts",
         "tsConfig": "apps/api/tsconfig.app.json",
         "isolatedConfig": true,
-        "webpackConfig": "apps/api/webpack.config.js"
+        "webpackConfig": "apps/api/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},
@@ -57,6 +58,21 @@
           "codeCoverage": true
         }
       }
+    },
+    "docker": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "mkdir docker/api/tmp/",
+          "rsync -aP dist/apps/api/* docker/api/tmp/",
+          "cp docker/Dockerfile.backend docker/api/tmp/Dockerfile",
+          "cp docker/.dockerignore docker/api/tmp/",
+          "docker build --no-cache docker/api/tmp/ --tag api:latest --build-arg BUILD_PORT=8080",
+          "rm -rf docker/api/tmp/"
+        ],
+        "parallel": false
+      },
+      "dependsOn": ["build"]
     }
   },
   "tags": []

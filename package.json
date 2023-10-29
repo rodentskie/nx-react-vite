@@ -5,7 +5,8 @@
   "scripts": {
     "seed:data": "export MIGRATION_SEEDER=initial-data && nx build migrations && node dist/apps/migrations/main.js",
     "seed:table": "export MIGRATION_SEEDER=initial-table && nx build migrations && node dist/apps/migrations/main.js",
-    "serve": "nx run $APP:serve"
+    "serve": "nx run $APP:serve",
+    "build:docker": "nx run-many --target=docker --parallel=6 --all"
   },
   "private": true,
   "dependencies": {
