@@ -67,7 +67,7 @@
           "rsync -aP dist/apps/api/* docker/api/tmp/",
           "cp docker/Dockerfile.backend docker/api/tmp/Dockerfile",
           "cp docker/.dockerignore docker/api/tmp/",
-          "docker build --no-cache docker/api/tmp/ --tag api:latest --build-arg BUILD_PORT=8080",
+          "docker build --no-cache docker/api/tmp/ --tag api:latest --build-arg BUILD_PORT=8080 --build-arg ACCESS_KEY=local --build-arg SECRET_KEY=local --build-arg REGION=us-east-1",
           "rm -rf docker/api/tmp/"
         ],
         "parallel": false
