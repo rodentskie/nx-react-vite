@@ -7,7 +7,7 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
 export default defineConfig({
   cacheDir: '../../node_modules/.vite/library-dashboard',
-
+  envPrefix: 'PRACTERA_',
   plugins: [
     react(),
     nxViteTsPaths(),

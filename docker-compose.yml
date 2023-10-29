@@ -46,6 +46,6 @@ services:
       - '5000:80'
     environment:
       PRACTERA_GQL_URL: 'http://api:9000/graphql'
-      PRACTERA_VERSION: 'v1.0.0'
+      PRACTERA_VERSION: 'v8.8.5'
     depends_on:
       - api
