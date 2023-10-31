@@ -66,7 +66,7 @@
         "commands": [
           "mkdir docker/migrations/tmp/",
           "rsync -aP dist/apps/migrations/* docker/migrations/tmp/",
-          "cp docker/Dockerfile.backend docker/migrations/tmp/Dockerfile",
+          "cp docker/Dockerfile.migrations docker/migrations/tmp/Dockerfile",
           "cp docker/.dockerignore docker/migrations/tmp/",
           "docker build --no-cache docker/migrations/tmp/ --tag migrations:latest --build-arg ACCESS_KEY=local --build-arg SECRET_KEY=local --build-arg REGION=us-east-1",
           "rm -rf docker/migrations/tmp/"
