@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  labels:
+    app: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+        environment: production
+    spec:
+      containers:
+        - name: api
+          image: api:latest
+          imagePullPolicy: Never
+          envFrom:
+            - configMapRef:
+                name: common-config
+          env:
+            - name: ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: ENVIRONMENT
+            - name: DB_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: DB_ENDPOINT
+            - name: AWS_SDK_LOAD_CONFIG
+              value: "1"
+            - name: PORT
+              value: "5000"
+          ports:
+            - containerPort: 5000

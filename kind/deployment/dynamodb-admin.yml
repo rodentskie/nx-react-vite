@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dynamodb-admin
+  labels:
+    app: dynamodb-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dynamodb-admin
+  template:
+    metadata:
+      labels:
+        app: dynamodb-admin
+        environment: production
+    spec:
+      containers:
+        - name: dynamodb-admin
+          image: aaronshaf/dynamodb-admin
+          envFrom:
+            - configMapRef:
+                name: common-config
+          env:
+            - name: AWS_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: AWS_REGION
+            - name: DYNAMO_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: DYNAMO_ENDPOINT
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: AWS_SECRET_ACCESS_KEY
+          ports:
+            - containerPort: 8001

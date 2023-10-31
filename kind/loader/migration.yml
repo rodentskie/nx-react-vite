@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migrations
+spec:
+  ttlSecondsAfterFinished: 30
+  template:
+    spec:
+      containers:
+        - name: migrations
+          image: migrations:latest
+          imagePullPolicy: Never
+          command: ['node', 'main']
+          envFrom:
+            - configMapRef:
+                name: common-config
+          env:
+            - name: ENTRY_POINT
+              value: seeds
+            - name: MIGRATION_SEEDER
+              value: initial-table
+            - name: DB_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: DB_ENDPOINT
+            - name: AWS_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: AWS_REGION
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: common-config
+                  key: AWS_SECRET_ACCESS_KEY
+      restartPolicy: Never

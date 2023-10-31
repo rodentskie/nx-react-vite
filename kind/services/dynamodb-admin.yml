@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dynamodb-admin
+  labels:
+    app: dynamodb-admin
+spec:
+  ports:
+    - port: 9000
+      targetPort: 8001
+      nodePort: 30130
+      protocol: TCP
+  type: NodePort
+  selector:
+    app: dynamodb-admin
