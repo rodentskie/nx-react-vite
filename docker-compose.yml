@@ -24,8 +24,7 @@ services:
     container_name: migrations
     environment:
       DB_ENDPOINT: 'http://dynamodb-local:8000'
-    command: >
-      /bin/sh -c 'export MIGRATION_SEEDER=initial-table && node main && sleep 5s && export MIGRATION_SEEDER=initial-data && node main'
+      MIGRATION_SEEDER: initial-table
     depends_on:
       - dynamodb-local
 

@@ -10,7 +10,6 @@ spec:
         - name: migrations
           image: migrations:latest
           imagePullPolicy: Never
-          command: ['node', 'main']
           envFrom:
             - configMapRef:
                 name: common-config
@@ -24,19 +23,4 @@ spec:
                 configMapKeyRef:
                   name: common-config
                   key: DB_ENDPOINT
-            - name: AWS_REGION
-              valueFrom:
-                configMapKeyRef:
-                  name: common-config
-                  key: AWS_REGION
-            - name: AWS_ACCESS_KEY_ID
-              valueFrom:
-                configMapKeyRef:
-                  name: common-config
-                  key: AWS_ACCESS_KEY_ID
-            - name: AWS_SECRET_ACCESS_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: common-config
-                  key: AWS_SECRET_ACCESS_KEY
       restartPolicy: Never
